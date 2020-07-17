@@ -1,0 +1,9 @@
+App\Entity\VerificationRequest:
+    collectionOperations:
+        get: ~
+        post: ~
+    itemOperations:
+        get: ~
+        put: ~
+        patch: ~
+        delete: ~

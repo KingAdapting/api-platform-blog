@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\PostRepository;
@@ -19,21 +21,25 @@ class Post
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @var string
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
+     * @var \DateTimeImmutable
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
+     * @var User
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */

@@ -1,0 +1,14 @@
+App\Entity\User:
+    attributes:
+        email:
+            groups: ['user:create', 'user:read']
+        password:
+            groups: ['user:create', 'user:edit']
+        roles:
+            groups: ['user:read']
+        firstName:
+            groups: ['user:create', 'user:edit', 'user:read']
+        lastName:
+            groups: ['user:create', 'user:edit', 'user:read']
+        createdAt:
+            groups: ['user:read']

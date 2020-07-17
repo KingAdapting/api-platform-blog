@@ -1,0 +1,9 @@
+App\Entity\Post:
+    collectionOperations:
+        get: ~
+        post: ~
+    itemOperations:
+        get: ~
+        put: ~
+        patch: ~
+        delete: ~

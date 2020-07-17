@@ -1,0 +1,18 @@
+App\Entity\User:
+    attributes:
+        normalization_context:
+            groups: ['user:read']
+    collectionOperations:
+        get: ~
+        post:
+            denormalization_context:
+                groups: ['user:create']
+    itemOperations:
+        get: ~
+        put:
+            denormalization_context:
+                groups: ['user:edit']
+        patch:
+            denormalization_context:
+                groups: ['user:edit']
+        delete: ~

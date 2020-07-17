@@ -11,7 +11,7 @@ use MyCLabs\Enum\Enum;
  * @method static self ROLE_BLOGGER
  * @method static self ROLE_ADMIN
  */
-class UserStatus extends Enum
+class UserRole extends Enum
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_BLOGGER = 'ROLE_BLOGGER';

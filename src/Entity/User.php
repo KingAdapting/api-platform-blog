@@ -1,17 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
+use App\Enum\UserRole;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="users")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -24,6 +29,16 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -39,6 +54,12 @@ class User
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
      */
     private $posts;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -60,6 +81,42 @@ class User
         $this->email = $email;
 
         return $this;
+    }
+
+    public function getUsername()
+    {
+        return (string) $this->email;
+    }
+
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        $roles[] = UserRole::ROLE_USER;
+
+        return array_unique($roles);
+
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 
     public function getFirstName(): ?string
@@ -86,9 +143,6 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection|Post[]
-     */
     public function getPosts(): Collection
     {
         return $this->posts;
@@ -113,6 +167,18 @@ class User
                 $post->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
