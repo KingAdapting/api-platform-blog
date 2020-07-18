@@ -36,6 +36,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * User password virtual property
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -97,6 +102,13 @@ class User implements UserInterface
 
     }
 
+    public function addRole(string $role): self
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
     public function getPassword(): string
     {
         return $this->password;
@@ -152,7 +164,7 @@ class User implements UserInterface
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
-            $post->setUser($this);
+            $post->setAuthor($this);
         }
 
         return $this;
@@ -163,8 +175,8 @@ class User implements UserInterface
         if ($this->posts->contains($post)) {
             $this->posts->removeElement($post);
             // set the owning side to null (unless already changed)
-            if ($post->getUser() === $this) {
-                $post->setUser(null);
+            if ($post->getAuthor() === $this) {
+                $post->setAuthor(null);
             }
         }
 
@@ -179,6 +191,18 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

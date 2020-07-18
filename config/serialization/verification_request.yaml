@@ -1,0 +1,14 @@
+App\Entity\VerificationRequest:
+    attributes:
+        message:
+            groups: [
+                'verification_request:create',
+                'verification_request:edit',
+                'verification_request:read',
+            ]
+        status:
+            groups: ['verification_request:read']
+        rejectReason:
+            groups: ['verification_request:read', 'verification_request:decline']
+        createdAt:
+            groups: ['verification_request:read']

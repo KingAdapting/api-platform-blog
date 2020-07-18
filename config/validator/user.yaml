@@ -1,0 +1,16 @@
+App\Entity\User:
+    properties:
+        email:
+            - Email:
+                groups: ['user:create', 'user:edit']
+            - NotBlank:
+                groups: ['user:create']
+        plainPassword:
+            - NotBlank:
+                groups: ['user:create']
+        firstName:
+            - NotBlank:
+                groups: ['user:create']
+        lastName:
+            - NotBlank:
+                groups: ['user:create']

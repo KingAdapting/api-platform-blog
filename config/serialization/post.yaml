@@ -1,0 +1,8 @@
+App\Entity\Post:
+    attributes:
+        title:
+            groups: ['post:create', 'post:edit', 'post:read']
+        content:
+            groups: ['post:create', 'post:edit', 'post:read']
+        createdAt:
+            groups: ['post:read']

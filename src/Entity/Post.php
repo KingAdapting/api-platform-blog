@@ -6,12 +6,14 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ORM\Table(name="posts")
  */
-class Post
+class Post implements AuthoredEntityInterface
 {
     /**
      * @ORM\Id()
@@ -21,29 +23,26 @@ class Post
     private $id;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @var \DateTimeImmutable
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
-     * @var User
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $author;
 
     public function getId(): ?int
     {
@@ -86,14 +85,14 @@ class Post
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getAuthor(): UserInterface
     {
-        return $this->user;
+        return $this->author;
     }
 
-    public function setUser(?User $user): self
+    public function setAuthor(UserInterface $author): AuthoredEntityInterface
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }

@@ -2,7 +2,8 @@ App\Entity\User:
     attributes:
         email:
             groups: ['user:create', 'user:read']
-        password:
+        plainPassword:
+            serialized_name: password
             groups: ['user:create', 'user:edit']
         roles:
             groups: ['user:read']

@@ -3,16 +3,24 @@ App\Entity\User:
         normalization_context:
             groups: ['user:read']
     collectionOperations:
-        get: ~
+        get:
+            security: 'is_granted("ROLE_ADMIN")'
         post:
             denormalization_context:
                 groups: ['user:create']
+            validation_groups: 'user:create'
     itemOperations:
-        get: ~
+        get:
+            security: 'is_granted("ROLE_ADMIN") or (object == user)'
         put:
             denormalization_context:
                 groups: ['user:edit']
+            validation_groups: 'user:edit'
+            security: 'is_granted("ROLE_ADMIN") or (object == user)'
         patch:
             denormalization_context:
                 groups: ['user:edit']
-        delete: ~
+            validation_groups: 'user:edit'
+            security: 'is_granted("ROLE_ADMIN") or (object == user)'
+        delete:
+            security: 'is_granted("ROLE_ADMIN")'

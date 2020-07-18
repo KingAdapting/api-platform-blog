@@ -1,0 +1,12 @@
+App\Entity\VerificationRequest:
+    constraints:
+        - App\Validator\Constraints\VerificationRequestExist\VerificationRequestExist:
+              groups: ['verification_request:create']
+    properties:
+        identityDocumentFile:
+            - File:
+                groups: ['verification_request:create', 'verification_request:update']
+                mimeTypes: [image/jpeg, image/png]
+                mimeTypesMessage: File mime type should be either image/jpeg or image/png
+            - NotBlank:
+                groups: ['verification_request:create']

@@ -1,9 +1,53 @@
 App\Entity\VerificationRequest:
+    attributes:
+        normalization_context:
+            groups: ['verification_request:read']
     collectionOperations:
-        get: ~
-        post: ~
+        get:
+            security: 'is_granted("ROLE_ADMIN")'
+            filters: ['verification_request.search_filter']
+        post:
+            method: POST
+            path: /verification_requests
+            security: 'is_granted("ROLE_USER")'
+            deserialize: false
+            controller: App\Controller\VerificationRequest\Create\Command
+            openapi_context:
+                requestBody:
+                    content:
+                        multipart/form-data:
+                            schema:
+                                type: object
+                                properties:
+                                    file:
+                                        type: string
+                                        format: binary
+                                    message:
+                                        type: string
     itemOperations:
-        get: ~
-        put: ~
-        patch: ~
-        delete: ~
+        get:
+            security: 'is_granted("ROLE_ADMIN") or is_granted("VIEW", object)'
+        put:
+            denormalization_context:
+                groups: ['verification_request:edit']
+            security: 'is_granted("ROLE_ADMIN") or is_granted("EDIT", object)'
+        approve:
+            method: PUT
+            denormalization_context:
+                groups: []
+            path: /verification_requests/{id}/approve.{_format}
+            security: 'is_granted("ROLE_ADMIN")'
+            controller: App\Controller\VerificationRequest\Review\Command
+        decline:
+            method: PUT
+            denormalization_context:
+                groups: ['verification_request:decline']
+            path: /verification_requests/{id}/decline.{_format}
+            security: 'is_granted("ROLE_ADMIN")'
+            controller: App\Controller\VerificationRequest\Review\Command
+        patch:
+            denormalization_context:
+                groups: ['verification_request:edit']
+            security: 'is_granted("ROLE_ADMIN") or is_granted("EDIT", object)'
+        delete:
+            security: 'is_granted("ROLE_ADMIN") or is_granted("DELETE", object)'

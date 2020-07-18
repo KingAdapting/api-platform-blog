@@ -16,4 +16,9 @@ class VerificationRequestStatus extends Enum
     const VERIFICATION_REQUESTED = 'verification_requested';
     const APPROVED = 'approved';
     const DECLINED = 'declined';
+
+    public static function getReviewedStatuses(): array
+    {
+        return [self::APPROVED, self::DECLINED];
+    }
 }

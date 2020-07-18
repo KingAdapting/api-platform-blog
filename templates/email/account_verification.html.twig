@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Dear, {{ user.firstName }} {{ user.lastName }}</h1>
+
+    {% if request.status == constant('App\\Enum\\VerificationRequestStatus::APPROVED') %}
+        <p>Your account is approved by administration. You can create posts</p>
+    {% else %}
+        <p>Your account is declined by administration</p>
+        {% if request.rejectReason %}
+            <p>Reason: {{ request.rejectReason }}</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

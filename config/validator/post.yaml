@@ -1,0 +1,8 @@
+App\Entity\Post:
+    properties:
+        title:
+            - NotBlank:
+                groups: ['user:create']
+        content:
+            - NotBlank:
+                groups: ['user:create']

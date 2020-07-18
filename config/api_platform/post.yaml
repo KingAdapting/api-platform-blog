@@ -1,9 +1,22 @@
 App\Entity\Post:
+    attributes:
+        normalization_context:
+            groups: ['post:read']
     collectionOperations:
         get: ~
-        post: ~
+        post:
+            security: 'is_granted("ROLE_ADMIN") or is_granted("CREATE", object)'
+            denormalization_context:
+                groups: ['post:create']
     itemOperations:
         get: ~
-        put: ~
-        patch: ~
-        delete: ~
+        put:
+            security: 'is_granted("ROLE_ADMIN") or is_granted("EDIT", object)'
+            denormalization_context:
+                groups: ['post:edit']
+        patch:
+            security: 'is_granted("ROLE_ADMIN") or is_granted("EDIT", object)'
+            denormalization_context:
+                groups: ['post:edit']
+        delete:
+            security: 'is_granted("ROLE_ADMIN") or is_granted("DELETE", object)'

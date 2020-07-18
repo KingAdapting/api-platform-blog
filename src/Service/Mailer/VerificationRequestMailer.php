@@ -9,21 +9,24 @@ use App\Entity\VerificationRequest;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class VerificationRequestMailer extends AbstractMailer
 {
+    private $sender;
+
     public function __construct(
         MailerInterface $mailer,
         LoggerInterface $logger,
         SerializerInterface $serializer,
         string $sender
     ) {
-        parent::__construct($mailer, $logger, $serializer, $sender);
+        parent::__construct($mailer, $logger, $serializer);
+        $this->sender = $sender;
     }
 
-    public function sendNotificationEmail(User $user, VerificationRequest $request): void
+    public function sendNotificationEmail(UserInterface $user, VerificationRequest $request): void
     {
         $email = (new TemplatedEmail())
             ->from($this->sender)

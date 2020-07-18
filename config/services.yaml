@@ -4,7 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+    identity_documents_dir: '%kernel.project_dir%/public/identity_documents'
+    email_sender: 'roger.afflex@gmail.com'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -26,7 +27,38 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Service\Mailer\VerificationRequestMailer:
+        arguments:
+            $sender: '%email_sender%'
+
+    # API Platform decorators
     App\Swagger\SwaggerDecorator:
         decorates: 'api_platform.swagger.normalizer.documentation'
         arguments: ['@App\Swagger\SwaggerDecorator.inner']
         autoconfigure: false
+
+    # API Platform filters
+    verification_request.search_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { status: 'exact', author.email: 'exact', author.firstName: 'exact', author.lastName: 'exact' } ]
+        tags:  [ 'api_platform.filter' ]
+        # The following are mandatory only if a _defaults section is defined
+        # You may want to isolate filters in a dedicated file to avoid adding them
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    verification_request.order_filter:
+        parent: 'api_platform.doctrine.orm.order_filter'
+        arguments: [ { createdAt: ~ }, { orderParameterName: 'order' } ]
+        tags:  [ 'api_platform.filter' ]
+        # The following are mandatory only if a _defaults section is defined
+        # You may want to isolate filters in a dedicated file to avoid adding them
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    # event listeners
+    App\EventListener\AuthoredEntityListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 33, method: onEntityCreate }
