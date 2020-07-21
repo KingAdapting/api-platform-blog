@@ -7,7 +7,6 @@ namespace App\Entity;
 use App\Enum\VerificationRequestStatus;
 use App\Repository\VerificationRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;

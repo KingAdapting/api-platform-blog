@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Security;
 class Handler
 {
     private const DECLINE_ROUTE_NAME = 'api_verification_requests_decline_item';
-    private const APPROVED_ROUTE_NAME = 'api_verification_requests_approve_item';
+    private const APPROVE_ROUTE_NAME = 'api_verification_requests_approve_item';
 
     private $verificationRequestMailer;
     private $security;
@@ -39,7 +39,7 @@ class Handler
             case self::DECLINE_ROUTE_NAME:
                 $data->setStatus(VerificationRequestStatus::DECLINED);
                 break;
-            case self::APPROVED_ROUTE_NAME:
+            case self::APPROVE_ROUTE_NAME:
                 $data->setStatus(VerificationRequestStatus::APPROVED);
                 $data->getAuthor()->addRole(UserRole::ROLE_BLOGGER);
                 break;
@@ -49,7 +49,7 @@ class Handler
                 );
         }
 
-        $this->verificationRequestMailer->sendNotificationEmail($this->security->getUser(), $data);
+        $this->verificationRequestMailer->sendNotificationEmail($data->getAuthor(), $data);
 
         return $data;
     }

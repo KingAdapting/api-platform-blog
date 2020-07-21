@@ -40,6 +40,9 @@
     "doctrine/common": {
         "version": "2.13.3"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.4.3"
+    },
     "doctrine/dbal": {
         "version": "2.10.2"
     },
@@ -56,6 +59,18 @@
             "config/packages/prod/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "fc52d86631a6dfd9fdf3381d0b7e3df2069e51b3"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/event-manager": {
@@ -93,6 +108,9 @@
     },
     "jms/metadata": {
         "version": "2.3.0"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.10"
     },
     "lcobucci/jwt": {
         "version": "3.3.2"
@@ -178,6 +196,9 @@
     "symfony/asset": {
         "version": "v5.1.2"
     },
+    "symfony/browser-kit": {
+        "version": "v5.1.2"
+    },
     "symfony/cache": {
         "version": "v5.1.2"
     },
@@ -199,6 +220,9 @@
             "bin/console"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.1.2"
+    },
     "symfony/dependency-injection": {
         "version": "v5.1.2"
     },
@@ -206,6 +230,9 @@
         "version": "v2.1.3"
     },
     "symfony/doctrine-bridge": {
+        "version": "v5.1.2"
+    },
+    "symfony/dom-crawler": {
         "version": "v5.1.2"
     },
     "symfony/dotenv": {
@@ -263,6 +290,12 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.1.2"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.1.3"
+    },
     "symfony/http-foundation": {
         "version": "v5.1.2"
     },
@@ -319,6 +352,21 @@
     },
     "symfony/options-resolver": {
         "version": "v5.1.2"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.18.0"
@@ -393,6 +441,9 @@
     },
     "symfony/string": {
         "version": "v5.1.2"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.6"
     },
     "symfony/translation-contracts": {
         "version": "v2.1.3"
