@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Auth;
+namespace App\Tests\Functional\User;
 
 use App\Entity\User;
 use App\Enum\UserRole;
@@ -11,7 +11,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
-class AuthFixture extends Fixture
+class UserFixtures extends Fixture
 {
     public const REFERENCE_ADMIN = 'test_auth_admin';
     public const REFERENCE_USER = 'test_auth_user';
@@ -31,7 +31,7 @@ class AuthFixture extends Fixture
         $hashedPassword = $passwordEncoder->encodePassword(self::DEFAULT_PASSWORD, null);
 
         $admin = (new UserBuilder())
-            ->viaEmail(self::adminCredentials()['PHP_AUTH_USER'], $hashedPassword)
+            ->viaEmail(self::adminCredentials()['email'], $hashedPassword)
             ->withRole(UserRole::ROLE_ADMIN())
             ->build()
         ;
@@ -40,7 +40,7 @@ class AuthFixture extends Fixture
         $this->setReference(self::REFERENCE_ADMIN, $admin);
 
         $user = (new UserBuilder())
-            ->viaEmail(self::userCredentials()['PHP_AUTH_USER'], $hashedPassword)
+            ->viaEmail(self::userCredentials()['email'], $hashedPassword)
             ->withRole(UserRole::ROLE_USER())
             ->build()
         ;
@@ -49,7 +49,7 @@ class AuthFixture extends Fixture
         $this->setReference(self::REFERENCE_USER, $user);
 
         $blogger = (new UserBuilder())
-            ->viaEmail(self::bloggerCredentials()['PHP_AUTH_USER'], $hashedPassword)
+            ->viaEmail(self::bloggerCredentials()['email'], $hashedPassword)
             ->withRole(UserRole::ROLE_BLOGGER())
             ->build()
         ;
@@ -63,24 +63,24 @@ class AuthFixture extends Fixture
     public static function adminCredentials(): array
     {
         return [
-            'PHP_AUTH_USER' => 'auth-admin@app.test',
-            'PHP_AUTH_PW' => 'password',
+            'email' => 'auth-admin@app.test',
+            'password' => 'password',
         ];
     }
 
     public static function userCredentials(): array
     {
         return [
-            'PHP_AUTH_USER' => 'auth-user@app.test',
-            'PHP_AUTH_PW' => 'password',
+            'email' => 'auth-user@app.test',
+            'password' => 'password',
         ];
     }
 
     public static function bloggerCredentials(): array
     {
         return [
-            'PHP_AUTH_USER' => 'auth-blogger@app.test',
-            'PHP_AUTH_PW' => 'password',
+            'email' => 'auth-blogger@app.test',
+            'password' => 'password',
         ];
     }
 }

@@ -28,9 +28,13 @@
     ```
 2. Update schema
     ```
-    docker-compose exec php-fpm php bin/console d:s:u --env=test
+    docker-compose exec php-fpm php bin/console d:s:u --force --env=test
     ```
 3. Load test fixtures
     ```
     docker-compose exec php-fpm php bin/console d:f:l --no-interaction --env=test
+    ```
+4. Run tests
+    ```
+    docker-compose exec php-fpm php bin/phpunit
     ```

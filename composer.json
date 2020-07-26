@@ -5,10 +5,12 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "api-platform/core": "^2.1",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^1.6 || ^2.0",
         "doctrine/orm": "^2.4.5",
+        "fzaninotto/faker": "^1.9",
         "lexik/jwt-authentication-bundle": "^2.8",
         "myclabs/php-enum": "^1.7",
         "nelmio/cors-bundle": "^1.5 || ^2.0",
@@ -29,6 +31,7 @@
         "vich/uploader-bundle": "^1.15"
     },
     "require-dev": {
+        "coduo/php-matcher": "^4.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "justinrainbow/json-schema": "^5.2",
         "symfony/browser-kit": "^5.1",

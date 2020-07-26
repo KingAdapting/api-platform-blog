@@ -5,7 +5,7 @@ App\Entity\Post:
     collectionOperations:
         get: ~
         post:
-            security: 'is_granted("ROLE_ADMIN") or is_granted("CREATE", object)'
+            security_post_denormalize: 'is_granted("CREATE", object)'
             denormalization_context:
                 groups: ['post:create']
     itemOperations:

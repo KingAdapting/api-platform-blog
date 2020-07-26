@@ -1,0 +1,7 @@
+security:
+    firewalls:
+        api:
+            http_basic:
+                provider: app_user_provider
+        main:
+            http_basic: ~

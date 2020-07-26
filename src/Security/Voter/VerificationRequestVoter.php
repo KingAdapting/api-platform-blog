@@ -61,7 +61,7 @@ class VerificationRequestVoter extends Voter
 
     private function canDelete(VerificationRequest $verificationRequest, UserInterface $user): bool
     {
-        return in_array($verificationRequest->getStatus(), VerificationRequestStatus::getReviewedStatuses())
+        return !in_array($verificationRequest->getStatus(), VerificationRequestStatus::getReviewedStatuses())
             && $verificationRequest->getAuthor() === $user;
     }
 }
