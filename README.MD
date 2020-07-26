@@ -24,15 +24,15 @@
 # Testing
 1. Create separate database for testing
     ```
-    docker-compose exec php-fpm php bin/console d:d:c --env=test
+    docker-compose exec php-fpm php bin/console doctrine:database:create --env=test
     ```
 2. Update schema
     ```
-    docker-compose exec php-fpm php bin/console d:s:u --force --env=test
+    docker-compose exec php-fpm php bin/console doctrine:schema:update --force --env=test
     ```
 3. Load test fixtures
     ```
-    docker-compose exec php-fpm php bin/console d:f:l --no-interaction --env=test
+    docker-compose exec php-fpm php bin/console doctrine:fixtures:load --no-interaction --env=test
     ```
 4. Run tests
     ```
