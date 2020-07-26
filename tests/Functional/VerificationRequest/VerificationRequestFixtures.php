@@ -17,7 +17,7 @@ class VerificationRequestFixtures extends AbstractFixture implements DependentFi
     {
         $data = $this->getData();
 
-        $this->createMany(2, 'verification_requests', function ($i) use ($data) {
+        $this->createMany(count($data), 'verification_requests', function ($i) use ($data) {
             return (new VerificationRequest())
                 ->setMessage($this->faker->realText(15))
                 ->setAuthor($this->getReference($data[$i]['authorReference']))
