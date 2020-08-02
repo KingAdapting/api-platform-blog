@@ -41,13 +41,10 @@ class PostVoter extends Voter
         switch ($attribute) {
             case self::CREATE:
                 return $this->canCreate();
-                break;
             case self::EDIT:
                 return $this->canEdit($subject, $user);
-                break;
             case self::DELETE:
                 return $this->canDelete($subject, $user);
-                break;
             default:
                 return false;
         }
