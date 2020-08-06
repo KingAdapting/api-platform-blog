@@ -41,5 +41,9 @@
 # Static analysis tools
 1. Psalm
     ```
-    docker-compose exec php-fpm php ./vendor/bin/psalm
+    docker-compose exec php-fpm ./vendor/bin/psalm
+    ```
+2. PHPStan
+    ```
+    docker-compose exec php-fpm vendor/bin/phpstan analyse src
     ```

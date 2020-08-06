@@ -8,7 +8,7 @@ use App\DataFixtures\AbstractFixture;
 use App\Entity\Post;
 use App\Tests\Functional\User\UserFixtures;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class PostFixtures extends AbstractFixture implements DependentFixtureInterface
 {

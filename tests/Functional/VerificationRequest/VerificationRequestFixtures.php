@@ -9,7 +9,7 @@ use App\Entity\VerificationRequest;
 use App\Enum\VerificationRequestStatus;
 use App\Tests\Functional\User\UserFixtures;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class VerificationRequestFixtures extends AbstractFixture implements DependentFixtureInterface
 {
