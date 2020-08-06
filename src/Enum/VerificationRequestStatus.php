@@ -7,9 +7,12 @@ namespace App\Enum;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method static self VERIFICATION_REQUESTED
- * @method static self APPROVED
- * @method static self DECLINED
+ * @method static VerificationRequestStatus VERIFICATION_REQUESTED()
+ * @method static VerificationRequestStatus APPROVED()
+ * @method static VerificationRequestStatus DECLINED()
+ *
+ * @psalm-template T
+ * @psalm-immutable
  */
 class VerificationRequestStatus extends Enum
 {

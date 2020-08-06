@@ -110,7 +110,7 @@ class VerificationRequest implements AuthoredEntityInterface
         return $this;
     }
 
-    public function getAuthor(): ?UserInterface
+    public function getAuthor(): ?User
     {
         return $this->author;
     }

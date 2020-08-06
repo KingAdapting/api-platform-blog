@@ -26,7 +26,7 @@ class VerificationRequestMailer extends AbstractMailer
         $this->sender = $sender;
     }
 
-    public function sendNotificationEmail(UserInterface $user, VerificationRequest $request): void
+    public function sendNotificationEmail(User $user, VerificationRequest $request): void
     {
         $email = (new TemplatedEmail())
             ->from($this->sender)

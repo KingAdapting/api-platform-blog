@@ -38,3 +38,8 @@
     ```
     docker-compose exec php-fpm php bin/phpunit
     ```
+# Static analysis tools
+1. Psalm
+    ```
+    docker-compose exec php-fpm php ./vendor/bin/psalm
+    ```

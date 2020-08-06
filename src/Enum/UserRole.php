@@ -7,9 +7,12 @@ namespace App\Enum;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method static self ROLE_USER
- * @method static self ROLE_BLOGGER
- * @method static self ROLE_ADMIN
+ * @method static UserRole ROLE_USER()
+ * @method static UserRole ROLE_BLOGGER()
+ * @method static UserRole ROLE_ADMIN()
+ *
+ * @psalm-template T
+ * @psalm-immutable
  */
 class UserRole extends Enum
 {
